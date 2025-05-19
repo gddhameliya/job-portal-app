@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3004/api/v1/user/login", {
+      const response = await axios.post("https://job-portal-app-production-b1f6.up.railway.app/api/v1/user/login", {
         email,
         password,
       });

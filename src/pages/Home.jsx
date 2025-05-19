@@ -10,7 +10,7 @@ const Home = () => {
 
   const fetchJobs = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get("http://localhost:3004/api/v1/job/fetch-job", {
+    const res = await axios.get("https://job-portal-app-production-b1f6.up.railway.app/api/v1/job/fetch-job", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setJobs(res?.data?.payload);

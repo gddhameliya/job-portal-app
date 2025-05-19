@@ -14,14 +14,11 @@ const JobForm = ({ editMode = false }) => {
       const fetchJob = async () => {
         const token = localStorage.getItem("token");
         try {
-          const response = await axios.get(
-            `http://localhost:3004/api/v1/job/fetch-job-by-id/${id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await axios.get(`https://job-portal-app-production-b1f6.up.railway.app/api/v1/job/fetch-job-by-id/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           setTitle(response?.data?.payload?.title);
           setDescription(response?.data?.payload?.description);
         } catch (error) {
@@ -39,7 +36,7 @@ const JobForm = ({ editMode = false }) => {
     try {
       if (editMode) {
         await axios.put(
-          `http://localhost:3004/api/v1/job/update-job/${id}`,
+          `https://job-portal-app-production-b1f6.up.railway.app/api/v1/job/update-job/${id}`,
           {
             title,
             description,
@@ -52,7 +49,7 @@ const JobForm = ({ editMode = false }) => {
         );
       } else {
         await axios.post(
-          "http://localhost:3004/api/v1/job/create",
+          "https://job-portal-app-production-b1f6.up.railway.app/api/v1/job/create",
           {
             title,
             description,
@@ -77,22 +74,8 @@ const JobForm = ({ editMode = false }) => {
         {editMode ? "Edit Job" : "Create Job"}
       </Typography>
       <form onSubmit={handleSubmit}>
-        <TextField
-          label="Title"
-          fullWidth
-          margin="normal"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <TextField
-          label="Description"
-          fullWidth
-          margin="normal"
-          multiline
-          rows={4}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+        <TextField label="Title" fullWidth margin="normal" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <TextField label="Description" fullWidth margin="normal" multiline rows={4} value={description} onChange={(e) => setDescription(e.target.value)} />
         <Button type="submit" variant="contained" color="primary">
           {editMode ? "Update" : "Submit"}
         </Button>
